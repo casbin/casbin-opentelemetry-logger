@@ -48,7 +48,7 @@ import (
     opentelemetrylogger "github.com/casbin/casbin-opentelemetry-logger"
     "github.com/prometheus/client_golang/prometheus"
     "github.com/prometheus/client_golang/prometheus/promhttp"
-    "go.opentelemetry.io/otel/exporters/prometheus"
+    promexporter "go.opentelemetry.io/otel/exporters/prometheus"
     "go.opentelemetry.io/otel/sdk/metric"
 )
 
@@ -57,7 +57,7 @@ func main() {
     reg := prometheus.NewRegistry()
     
     // Create a Prometheus exporter for OpenTelemetry metrics
-    exporter, err := prometheus.New(prometheus.WithRegisterer(reg))
+    exporter, err := promexporter.New(promexporter.WithRegisterer(reg))
     if err != nil {
         log.Fatalf("Failed to create Prometheus exporter: %v", err)
     }
